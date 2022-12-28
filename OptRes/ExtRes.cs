@@ -37,6 +37,12 @@ public static partial class Ext
     /// </summary>
     public static Res OkIf(bool okCondition, [CallerArgumentExpression("okCondition")] string name = "")
         => okCondition ? default : new("Condition doesn't hold.", name, null);
+    /// <summary>
+    /// Creates a result as Err variant if the <paramref name="errorCondition"/> holds.
+    /// Otherwise, it will return Ok.
+    /// </summary>
+    public static Res ErrIf(bool errorCondition, [CallerArgumentExpression("errorCondition")] string name = "")
+        => errorCondition ? new("Error condition holds.", name, null) : default;
 
 
     // helper - try

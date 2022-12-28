@@ -193,6 +193,9 @@ public static partial class Ext
     /// </summary>
     public static IEnumerable<Res<TOut>> TryMap<T, TOut>(this IEnumerable<Res> collection, Func<TOut> map, [CallerArgumentExpression("map")] string name = "")
         => collection.Select(item => item.TryMap(map, name));
+    
+    
+    // reduce-res
     /// <summary>
     /// Reduces the collection of results into a single result; returns
     /// (i) Ok if all items are Ok;
@@ -221,6 +224,22 @@ public static partial class Ext
     /// </summary>
     public static Res ReduceResults(params Res[] results)
         => results.AsEnumerable().Reduce();
+
+    // reduce-res<T>
+    /// <summary>
+    /// Reduces the underlying values of the <paramref name="collection"/> by transformation defined by <paramref name="funReduce"/> starting from <paramref name="initialValue"/>.
+    /// Result is Ok of the reduced value only if all elements of the collection are Ok; Err otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public static Res<T> Reduce<T>(this IEnumerable<Res<T>> collection, Func<T, T, T> funReduce)
+        => collection.TryUnwrap().Map(x => x.Aggregate(funReduce));
+    /// <summary>
+    /// Reduces the underlying values of the <paramref name="collection"/> by transformation defined by <paramref name="funReduce"/> starting from <paramref name="initialValue"/>.
+    /// Result is Ok of the reduced value only if all elements of the collection are Ok; Err otherwise.
+    /// </summary>
+    /// <returns></returns>
+    public static Res<U> Reduce<T, U>(this IEnumerable<Res<T>> collection, Func<U, T, U> funReduce, U initialValue)
+        => collection.TryUnwrap().Map(x => x.Aggregate(initialValue, funReduce));
 
 
     // col-res<T>

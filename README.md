@@ -5,23 +5,23 @@ C# library for option and result (simplified) types.
 Opt<T> is a readonly struct that can be either of the two variants:
 
 * **Some(T)**: holding a nonnull (!) value of T, or
-* **None**: simply nothing.
+* **None**: nothing, absense of data.
 
 Despite of the improvements in the language with nullable, the checks are still in warning level.
 
 The type Opt&lt;T> aims to:
 * make absense of data and optionality of a method argument explicit; and,
-* getting closer to fluent railway oriented programming in C# (see [Scott Wlaschin's talk](https://www.youtube.com/watch?v=srQt1NAHYC0)).
+* getting closer to fluent, railway oriented programming in C# (see [Scott Wlaschin's talk](https://www.youtube.com/watch?v=srQt1NAHYC0)).
 
-Some of the features are illustrated in the `Player` record below; the code can be found in Examples/Player.cs.
+Some of the features are illustrated in the `Player` record below; the code can be found in [Examples/Player.cs](https://github.com/Ugur-Arikan/OptRes/blob/main/Examples/Player.cs).
 
 
 ```csharp
 record Player(
     string Name,
     int Wins,
-    Opt<string> Nickname = default,     // stating explicitly that not all players has a nickname
-    Opt<string> EmailAddress = default
+    Opt<string> Nickname = default,     // stating explicitly that not all players have a nickname
+    Opt<string> EmailAddress = default  // default of Opt<T> is None<T>()
     )
 {
     public void Greet()
@@ -74,7 +74,7 @@ record Player(
 
         return others.FirstOrNone(x => x.Score() == Score());
     }
-    public Opt<string> FindMatchNickname(IEnumerable<Player> others)
+    public Opt<string> FindNicknameOfMatch(IEnumerable<Player> others)
     {
         // FindMatch(others).Map(x => x.Nickname) => would have returned Opt<Opt<string>>.
         // FlatMap allows to escape the nesting
@@ -83,6 +83,15 @@ record Player(
         // FindMatch(others).Map(x => x.Nickname).Flatten();
         
         return FindMatch(others).FlatMap(x => x.Nickname);
+    }
+    public Opt<char> FindInitialOfNicknameOfMatch(IEnumerable<Player> others)
+    {
+        // you may keep chaining:
+        // * if any step returns Non, it will be carried on to the end bypassing succeeding methods
+        // * the output will be IsSome only if all steps return Some.
+        return FindMatch(others)
+            .FlatMap(x => x.Nickname)
+            .Map(nick => nick[0]);
     }
 
 
@@ -99,7 +108,7 @@ record Player(
         Opt<bool> isWin = "false".ParseBoolOrNone();
         Opt<double> elapsedSeconds = "42.42".ParseDoubleOrNone();
 
-        // or the general parser can be provided
+        // and general parser for any T with lambda parser
         Opt<bool> isWinLambda = "Yes".TryParseOrNone(str => StringComparer.OrdinalIgnoreCase.Equals(str, "yes"));
     }
     public static List<string> Nicknames(IEnumerable<Player> players)
@@ -114,5 +123,36 @@ record Player(
 
         return dictNickPlayer.GetOpt(nickname);
     }
+
+
+    // static methods - constructors
+    public static Player Dendi()
+    {
+        return new Player(
+            Name: "Dendi",
+            Wins: 0,
+            Nickname: Some("NaVi"),         // static constructor for Some variant.
+            EmailAddress: None<string>()    // static constructor for None variant; can also use default
+            );
+    }
 }
 ```
+
+
+## Res and Res&lt;T>
+Res and Res&lt;T> are simplified result types, where the error variant holds only the error message.
+
+Res has the following two variants:
+* **Ok**: just a flag stating that the state is okay,
+* **Err(message)**: an error state with the corresponding error message.
+
+Res&lt;T>, on the other hand, can hold data and has the following variants:
+* **Ok(T)**: okay state holding a non-null (!) value of T,
+* **Err(message)**: an error state with the corresponding error message.
+
+These result types aim to:
+* make possibility of failures explicit;
+* avoiding (hiding) the verbose try-catch blocks, as well as, throwing exceptions,
+* getting closer to fluent, railway oriented programming in C#.
+
+Some of the features are illustrated in the example files [Examples/ExampleRes.cs](https://github.com/Ugur-Arikan/OptRes/blob/main/Examples/ExampleRes.cs) and [Examples/ExampleResT.cs](https://github.com/Ugur-Arikan/OptRes/blob/main/Examples/ExampleResT.cs).

@@ -3,8 +3,8 @@
 internal record Player(
     string Name,
     int Wins,
-    Opt<string> Nickname = default,     // stating explicitly that not all players has a nickname
-    Opt<string> EmailAddress = default
+    Opt<string> Nickname = default,     // stating explicitly that not all players have a nickname
+    Opt<string> EmailAddress = default  // default of Opt<T> is None<T>()
     )
 {
     public void Greet()
@@ -57,7 +57,7 @@ internal record Player(
 
         return others.FirstOrNone(x => x.Score() == Score());
     }
-    public Opt<string> FindMatchNickname(IEnumerable<Player> others)
+    public Opt<string> FindNicknameOfMatch(IEnumerable<Player> others)
     {
         // FindMatch(others).Map(x => x.Nickname) => would have returned Opt<Opt<string>>.
         // FlatMap allows to escape the nesting
@@ -66,6 +66,15 @@ internal record Player(
         // FindMatch(others).Map(x => x.Nickname).Flatten();
         
         return FindMatch(others).FlatMap(x => x.Nickname);
+    }
+    public Opt<char> FindInitialOfNicknameOfMatch(IEnumerable<Player> others)
+    {
+        // you may keep chaining:
+        // * if any step returns Non, it will be carried on to the end bypassing succeeding methods
+        // * the output will be IsSome only if all steps return Some.
+        return FindMatch(others)
+            .FlatMap(x => x.Nickname)
+            .Map(nick => nick[0]);
     }
 
 
@@ -82,7 +91,7 @@ internal record Player(
         Opt<bool> isWin = "false".ParseBoolOrNone();
         Opt<double> elapsedSeconds = "42.42".ParseDoubleOrNone();
 
-        // or the general parser can be provided
+        // and general parser for any T with lambda parser
         Opt<bool> isWinLambda = "Yes".TryParseOrNone(str => StringComparer.OrdinalIgnoreCase.Equals(str, "yes"));
     }
     public static List<string> Nicknames(IEnumerable<Player> players)
@@ -96,5 +105,17 @@ internal record Player(
         // alternative to GetValueOrDefault method which would have returned null in absent case.
 
         return dictNickPlayer.GetOpt(nickname);
+    }
+
+
+    // static methods - constructors
+    public static Player Dendi()
+    {
+        return new Player(
+            Name: "Dendi",
+            Wins: 0,
+            Nickname: Some("NaVi"),         // static constructor for Some variant.
+            EmailAddress: None<string>()    // static constructor for None variant; can also use default
+            );
     }
 }
