@@ -1,23 +1,6 @@
-# OptRes
-C# library for option and result (simplified) types.
+﻿namespace Examples;
 
-## Opt&lt;T>
-Opt<T> is a readonly struct that can be either of the two variants:
-
-* **Some(T)**: holding a nonnull (!) value of T, or
-* **None**: simply nothing.
-
-Despite of the improvements in the language with nullable, the checks are still in warning level.
-
-The type Opt&lt;T> aims to:
-* make absense of data and optionality of a method argument explicit; and,
-* getting closer to fluent railway oriented programming in C# (see [Scott Wlaschin's talk](https://www.youtube.com/watch?v=srQt1NAHYC0)).
-
-Some of the features are illustrated in the `Player` record below; the code can be found in Examples/Player.cs.
-
-
-```csharp
-record Player(
+internal record Player(
     string Name,
     int Wins,
     Opt<string> Nickname = default,     // stating explicitly that not all players has a nickname
@@ -115,4 +98,3 @@ record Player(
         return dictNickPlayer.GetOpt(nickname);
     }
 }
-```
