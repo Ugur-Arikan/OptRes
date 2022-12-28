@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,5 +6,15 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
+
+    <PropertyGroup>
+		<VersionPrefix>6.0.0</VersionPrefix>
+		<Description>Library for option and result (simplified) types.</Description>
+		<PackageProjectUrl>https://github.com/Ugur-Arikan/OptRes</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Ugur-Arikan/OptRes</RepositoryUrl>
+		<Authors>ugur-arikan</Authors>
+		<PackageTags>option;result;functional;monad;fluent;method-chain;railway-oriented</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
 
 </Project>
