@@ -31,10 +31,14 @@ record Player(
         // Nickname.UnwrapOr(() => Name)
         string greeting = string.Format("Hey {0}", Nickname.UnwrapOr(Name));
         Console.WriteLine(greeting);
+
+        // alternative uses of UnwrapOr, Match, IsSome & Unwrap
+        Assert(Nickname.UnwrapOr(Name) == Nickname.Match(whenSome: nick => nick, whenNone: Name));
+        Assert(Nickname.UnwrapOr(Name) == (Nickname.IsSome ? Nickname.Unwrap() : Name));
     }
     
     public bool HasNickname()
-        => Nickname.IsSome; // counterpart: IsNone
+        => Nickname.IsSome; // = !IsNone
 
     public Opt<int> NicknameLength()
     {
@@ -47,13 +51,13 @@ record Player(
     public void SendEmail(string message)
     {
         // send only if the player has an email address
-        EmailAddress.Do(email => Console.WriteLine($"[fake] sending {message} to {email}"));
+        EmailAddress.Do(emailAddr => Console.WriteLine($"fake-sending {message} to {emailAddr}"));
     }
 
     public int Score()
     {
         // assume having a nickname provides +5 wins.
-        return Wins + Nickname.Match(whenSome: 5, whenNone: 0);
+        return Wins + Nickname.Match(whenSome: _ => 5, whenNone: 0);
     }
 
     public void RemindToAddEmail()
