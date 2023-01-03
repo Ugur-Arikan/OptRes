@@ -56,7 +56,7 @@ internal static class ExampleRes
 
         // Match: both Ok and Err to values
         res = Ok();
-        bool isValid = res.Match(true, false); // match to a value; true if IsOk, false if IsErr
+        bool isValid = res.Match(true, _err => false); // match to a value; true if IsOk, false if IsErr
         string resultMessage = res.Match("valid", err => "Err: " + err); // error variant can use the internal error message
 
 

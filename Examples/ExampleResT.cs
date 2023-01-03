@@ -43,13 +43,13 @@ internal class ExampleResT
         Opt<Wizard> someWizard = "Merlin-42".TryParseOrNone(ParseWizard);
         Assert(someWizard == Some(new Wizard("Merlin", 42)));
 
-        Res<Wizard> okWizard = someWizard.ToRes(); // Some(Merlin) -> Ok(Merlin)
+        Res<Wizard> okWizard = someWizard.IntoRes(); // Some(Merlin) -> Ok(Merlin)
         Assert(okWizard.IsOk && okWizard.Unwrap() == new Wizard("Merlin", 42));
 
         Opt<Wizard> noneWizard = "badwizardinput".TryParseOrNone(ParseWizard);
         Assert(noneWizard.IsNone);
 
-        Res<Wizard> errWizard = noneWizard.ToRes(); // None -> Err
+        Res<Wizard> errWizard = noneWizard.IntoRes(); // None -> Err
         Assert(errWizard.IsErr);
 
 
@@ -80,12 +80,12 @@ internal class ExampleResT
         // Match: both Ok(val) and Err to values
         var resultWizard = Ok(new Wizard("Merlin", 42));
 
-        int nbSpells = resultWizard.Match(whenOk: w => w.NbSpells, whenErr: 0);
-        nbSpells = resultWizard.Match(w => w.NbSpells, 0);
+        int nbSpells = resultWizard.Match(whenOk: w => w.NbSpells, whenErr: _ => 0);
+        nbSpells = resultWizard.Match(w => w.NbSpells, _ => 0);
         nbSpells = resultWizard.Match(w => w.NbSpells, error => 0);
         Assert(nbSpells == 42);
 
-        int nbSpellsOfErr = Err<Wizard>("db-conn-err").Match(w => w.NbSpells, 0);
+        int nbSpellsOfErr = Err<Wizard>("db-conn-err").Match(w => w.NbSpells, _ => 0);
         Assert(nbSpellsOfErr == 0);
 
 

@@ -4,7 +4,7 @@ using System.Text;
 namespace OptRes;
 
 /// <summary>
-/// Error message configurations.
+/// Static configurations for error messages of the Err variant of <see cref="Res"/> or <see cref="Res{T}"/> result types.
 /// </summary>
 public static class Config
 {

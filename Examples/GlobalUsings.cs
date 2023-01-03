@@ -1,2 +1,2 @@
 ﻿global using OptRes;
-global using static OptRes.Ext;
+global using static OptRes.Extensions;
