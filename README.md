@@ -1,5 +1,25 @@
 # OptRes
-C# library for option and result (simplified) types.
+C# library for option and lightweight-result types:
+
+* `Opt<T>`: Some(T) or None;
+* `Res`: Ok or Err(message);
+* `Res<T>`: Ok(T) or Err(message).
+
+In order to enable the types glboally, add the following in project's global usings file:
+
+```csharp
+global using OptRes;
+global using static OptRes.Extensions;
+```
+
+Alternatively, the scope can be limited to a file by adding the following in the particular file:
+```csharp
+using OptRes;
+using static OptRes.Extensions;
+```
+
+Complete auto-generated documentation can be found here:
+[sandcastle-documentation](https://github.com/Ugur-Arikan/OptRes/blob/main/docs/index.html).
 
 ## Opt&lt;T>
 Opt<T> is a readonly struct that can be either of the two variants:
