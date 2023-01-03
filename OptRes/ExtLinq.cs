@@ -250,7 +250,7 @@ public static partial class Extensions
 
     // reduce-res<T>
     /// <summary>
-    /// Reduces the underlying values of the <paramref name="collection"/> by transformation defined by <paramref name="funReduce"/> starting from <paramref name="initialValue"/>.
+    /// Reduces the underlying values of the <paramref name="collection"/> by transformation defined by <paramref name="funReduce"/>.
     /// Result is Ok of the reduced value only if all elements of the collection are Ok; Err otherwise.
     /// <code>
     /// static Res&lt;double> TryGetScore(Player player) { .. }
