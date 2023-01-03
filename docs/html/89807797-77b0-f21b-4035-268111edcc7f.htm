@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>Opt&lt;T&gt; Methods</title><meta name="Title" content="Methods" /><meta name="Help.Id" content="Methods.T:OptRes.Opt`1" /><meta name="Help.ContentType" content="Reference" /><meta name="container" content="OptRes" /><meta name="guid" content="89807797-77b0-f21b-4035-268111edcc7f" /><meta name="tocFile" content="../toc/IDCA.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div id="DocumentationTitle" class="level-item">A Sandcastle Documented Class Library</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="TopicContent" class="column content is-7"><h1>Opt<span id="LSTFE074330_0" data-languageSpecificText="cpp=&lt;|cs=&lt;|fs=&lt;|vb=(Of |nu=("></span><span class="typeparameter">T</span><span id="LSTFE074330_1" data-languageSpecificText="cpp=&gt;|cs=&gt;|fs=&gt;|vb=)|nu=)"></span> Methods</h1><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Methods</h2><div id="IDAEASection"><table id="MethodList" class="table is-hoverable"><tr><td><a href="4ad62cf7-5a30-28bd-73db-44a511e204ad.htm">Do</a></td><td>
+            Runs <span class="parameter">action</span>(Unwrap()) only if IsSome; and returns itself back.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">// the logging call will only be made if the result of GetOptionalUser is Some of a user.
+// Since Do returns back the option, it can still be assigned to var 'user'.
+Opt&lt;User&gt; user = GetOptionalUser().Do(u =&gt; Log.Info($"User '{u.Name}' grabbed"));</code></pre></div></div></td></tr><tr><td><a href="48b5bf4b-a58e-c06d-3752-273de9f8a651.htm">DoIfNone</a></td><td>
+            Runs <span class="parameter">actionOnNone</span>() only if IsNone; and returns itself back.
+            Counterpart of <a href="4ad62cf7-5a30-28bd-73db-44a511e204ad.htm">Do(Action<span id="LSTFE074330_2" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>T<span id="LSTFE074330_3" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</a> for the None variant.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">// the logging call will only be made if the result of GetOptionalUser is None.
+// Since DoIfNone returns back the option, it can still be assigned to var 'user'.
+Opt&lt;User&gt; user = GetOptionalUser().DoIfNone(() =&gt; Log.Warning("User could not be read"));</code></pre></div></div></td></tr><tr><td><a href="0bf19452-6565-bc70-2768-60b74d4d0077.htm">Equals(Object)</a></td><td>
+            Returns whether this option is equal to the <span class="parameter">other</span>.
+            <br />(Overrides <a href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals#system-valuetype-equals(system-object)" target="_blank" rel="noopener noreferrer">ValueType<span id="LSTFE074330_4" data-languageSpecificText="cs=.|vb=.|cpp=::|nu=.|fs=."></span>Equals(Object)</a>)</td></tr><tr><td><a href="55199a3c-70af-31ab-5d5f-e5b154064970.htm">Equals(Opt<span id="LSTFE074330_5" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>T<span id="LSTFE074330_6" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</a></td><td>
+            Returns true if both values are <a href="4710cd0c-eaa4-15de-c823-9f3f7169b3e4.htm">IsSome</a> and their unwrapped values are equal; false otherwise.
+            </td></tr><tr><td><a href="ab322a90-32a3-4a0d-c1d8-3296bbcfec1d.htm">FlatMap<span id="LSTFE074330_7" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TOut<span id="LSTFE074330_8" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span></a></td><td>
+            Returns None when IsNone; <span class="parameter">map</span>(val) when IsSome flattening the result.
+            Shorthand combining Map and Flatten calls.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">static Opt&lt;User&gt; GetOptionalUser() {
+    // method that tries to get the user, which can be omitted.
+    ...
+}
+static Opt&lt;string&gt; GetNickname(User user) {
+    // method that tries to get the nickname of the passed-in user; which is optional
+    ...
+}
+Opt&lt;string&gt; nickname = GetOptionalUser().FlatMap(GetNickname);
+// equivalent to both below:
+nickname = GetOptionalUser().FlatMap(user =&gt; GetNickname(user));
+nickname = GetOptionalUser().Map(user =&gt; GetNickname(user) /*Opt&lt;Opt&lt;string&gt;&gt;*/).Flatten();</code></pre></div></div></td></tr><tr><td><a href="177dc588-b7f6-daa7-336c-f3a0cb1e848f.htm">GetHashCode</a></td><td>
+            Serves as the default hash function.
+            <br />(Overrides <a href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode#system-valuetype-gethashcode" target="_blank" rel="noopener noreferrer">ValueType<span id="LSTFE074330_9" data-languageSpecificText="cs=.|vb=.|cpp=::|nu=.|fs=."></span>GetHashCode<span id="LSTFE074330_10" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></a>)</td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype" target="_blank" rel="noopener noreferrer">GetType</a></td><td><br />(Inherited from <a href="https://learn.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">Object</a>)</td></tr><tr><td><a href="e35f7c65-1930-c2ba-cc2d-7ee80642d304.htm">IntoRes<span id="LSTFE074330_11" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></a></td><td>
+            Converts Opt&lt;T&gt; to Res&lt;T&gt;, by mapping:
+            <ul><li>Some(val) to Ok(val),</li><li>None to Err.</li></ul></td></tr><tr><td><a href="08ca2055-2b18-e31e-804d-686a8d151eba.htm">IntoRes(String)</a></td><td>
+            Converts Opt&lt;T&gt; to Res&lt;T&gt;, by mapping:
+            <ul><li>Some(val) to Ok(val),</li><li>None to Err invluding <span class="parameter">requiredValueName</span> in the message..</li></ul></td></tr><tr><td><a href="cd3c0d4b-11e3-79b4-eb49-5be1d3f3a84b.htm">Map<span id="LSTFE074330_12" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TOut<span id="LSTFE074330_13" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span></a></td><td>
+            Returns None when IsNone; Some(<span class="parameter">map</span>(Unwrap())) when IsSome.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">// session will be None if the user is None; Some of a session for the user when Some.
+Opt&lt;Session&gt; session = GetOptionalUser.Map(user =&gt; NewSession(user.Secrets));</code></pre></div></div></td></tr><tr><td><a href="5fd094d5-672f-16cc-4f99-eaaa29803775.htm">Match<span id="LSTFE074330_14" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TOut<span id="LSTFE074330_15" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>(Func<span id="LSTFE074330_16" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>T, TOut<span id="LSTFE074330_17" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, TOut)</a></td><td>
+            Maps into <span class="parameter">whenSome</span>(Unwrap()) whenever IsSome; and into <span class="parameter">whenNone</span> otherwise.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">Opt&lt;User&gt; user = GetOptionalUser(..);
+string greeting = user.Match(u =&gt; $"Welcome back {u.Name}", "Hello");
+greeting = user.Match(whenSome: u =&gt; $"Welcome back {u.Name}", whenNone: "Hello");</code></pre></div></div></td></tr><tr><td><a href="480af3a2-3fea-396a-0140-0c6fc18dcbdc.htm">Match<span id="LSTFE074330_18" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TOut<span id="LSTFE074330_19" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>(Func<span id="LSTFE074330_20" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>T, TOut<span id="LSTFE074330_21" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, Func<span id="LSTFE074330_22" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TOut<span id="LSTFE074330_23" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</a></td><td>
+            Maps into <span class="parameter">whenSome</span>(Unwrap()) whenever IsSome; and into lazy <span class="parameter">whenNone</span>() otherwise.
+            Similar to <a href="5fd094d5-672f-16cc-4f99-eaaa29803775.htm">Match<span id="LSTFE074330_24" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TOut<span id="LSTFE074330_25" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>(Func<span id="LSTFE074330_26" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>T, TOut<span id="LSTFE074330_27" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, TOut)</a> except that None variant is evaluated only when IsNone.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">// assuming QueryAnonymousGreeting() is expensive.
+Opt&lt;User&gt; user = GetOptionalUser(..);
+string greeting = user.Match(u =&gt; $"Welcome back {u.Name}", () =&gt; QueryAnonymousGreeting());</code></pre></div></div></td></tr><tr><td><a href="73563fc1-7df8-a762-e145-2c4ab9427060.htm">MatchDo</a></td><td>
+            Executes <span class="parameter">whenSome</span>(Unwrap()) if IsSome; <span class="parameter">whenNone</span>() otherwise.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">static Greet(Opt&lt;User&gt; user) {
+    user.MatchDo(
+        whenSome: u =&gt; Console.WriteLine($"Welcome back {u.Name}"),
+        whenNone: Console.WriteLine("Hello")
+    );
+}</code></pre></div></div></td></tr><tr><td><a href="4b7bd2d6-11ce-838e-a7e9-1b209c8bea2d.htm">SomeIf</a></td><td>
+            Returns back None if IsNone.
+            Otherwise, returns Some(value) if <span class="parameter">condition</span>(value) holds; None if it does not hold.
+            Especially useful in fluent input validation.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">static Opt&lt;Account&gt; MaybeParseAccount(..) { }
+static bool IsAccountNumberValid(int number) { }
+static bool DoesAccountExist(string code) { }
+
+var account = MaybeParseAccount(..)
+                .SomeIf(acc =&gt; IsAccountNumberValid(acc.Number))
+                .SomeIf(acc =&gt; DoesAccountExist(acc.Code));
+// account will be Some(account) only if:
+// - MaybeParseAccount returns Some(account), and further,
+// - both IsAccountNumberValid and DoesAccountExist validation checks return true.</code></pre></div></div></td></tr><tr><td><a href="122c5740-2abe-b650-e23f-b03c83b7436d.htm">ThrowIfNone</a></td><td>
+            Returns the option back when <a href="4710cd0c-eaa4-15de-c823-9f3f7169b3e4.htm">IsSome</a>; throws when <a href="fa0e79c2-f73d-1b35-6c7d-7c17560603c3.htm">IsNone</a>.
+            Appends the <span class="parameter">errorMessage</span> to the exception if the message <a href="4710cd0c-eaa4-15de-c823-9f3f7169b3e4.htm">IsSome</a>.
+            Can be called without breaking the fluent api.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">var interestRate = GetOptionalUser(input)
+    .ThrowIfNone("failed to get the user")
+    .Map(user =&gt; ComputeInterestRate(user))
+    .Unwrap();</code></pre></div></div></td></tr><tr><td><a href="bb4d7c66-2be7-6966-6fdc-432c387de3ad.htm">ToString</a></td><td>
+            Returns the text representation of the option.
+            <br />(Overrides <a href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring#system-valuetype-tostring" target="_blank" rel="noopener noreferrer">ValueType<span id="LSTFE074330_28" data-languageSpecificText="cs=.|vb=.|cpp=::|nu=.|fs=."></span>ToString<span id="LSTFE074330_29" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></a>)</td></tr><tr><td><a href="e995df99-e4cd-a89c-c000-1480d231f0b0.htm">Try</a></td><td>
+             When IsSome executes <span class="parameter">action</span>(val) in a try-catch block: returns back itself if the process succeeds; Err if it throws.
+             Does not do anything and returns Err when None.
+             <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">static Opt&lt;User&gt; GetUser() { .. }
+static void PutUserToDb(User user) {
+    // method that writes the user to a database table
+    // might fail and throw!
+}
+
+Res&lt;User&gt; user = GetUser().Try(PutUserToDb);
+// equivalently:
+Res&lt;User&gt; user = GetUser().Try(() =&gt; PutUserToDb());
+
+// user will be:
+// - Err(called on None) if GetUser returns None.
+// - Err(relevant error message) if GetUser returns Some(user) but database action throws an exception.
+// - Ok(user) if GetUser returns Some(user), further the action is operated successfully;
+
+// it provides a shorthand for the following verbose/unpleasant version:
+Opt&lt;User&gt; maybeUser = GetUser();
+Res&lt;User&gt; user;
+if (maybeUser.IsNone)
+    user = Err&lt;User&gt;("no user");
+else
+{
+    try
+    {
+        PutUserToDb(maybeUser.Unwrap());
+        user = Ok(maybeUser.Unwrap());
+    }
+    catch (Exception e)
+    {
+        user = Err&lt;User&gt;("db-operation failed, check the exception message: " + e.Message);
+    }
+}</code></pre></div></div></td></tr><tr><td><a href="f084d6ba-93cd-cdc7-2133-805617969999.htm">TryMap<span id="LSTFE074330_30" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TOut<span id="LSTFE074330_31" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span></a></td><td>
+            When IsOk tries to map to Ok(<span class="parameter">map</span>(value)) in a try-catch block: returns Err if it throws.
+            Does not do anything and returns back itself when IsErr.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">static Opt&lt;User&gt; GetUser() { .. }
+static long PutUserToDbGetId(User user) {
+    // method that writes the user to a database table and returns back the auto-generated id/primary-key
+    // might fail and throw!
+}
+
+Res&lt;long&gt; id = GetUser().TryMap(PutUserToDbGetId);
+// equivalently:
+Res&lt;long&gt; id = GetUser().TryMap(user =&gt; PutUserToDbGetId(user));
+
+// Res&lt;long&gt; id will be:
+// - Err(due to none) when GetUser returns None,
+// - Err(relevant error message) when GetUser returns Some(user) but the database transaction throws an exception,
+// - Ok(id) when GetUser returns Some(user), the database transaction succeeds and returns the auto-generated id.
+
+// it provides a shorthand for the following verbose/unpleasant version:
+Opt&lt;User&gt; maybeUser = GetUser();
+Res&lt;long&gt; id;
+if (maybeUser.IsNone)
+    id = Err&lt;long&gt;("no user");
+else
+{
+    try
+    {
+        id = Ok(PutUserToDb(maybeUser.Unwrap()));
+    }
+    catch (Exception e)
+    {
+        id = Err&lt;long&gt;("db-operation failed, check the exception message: " + e.Message);
+    }
+}</code></pre></div></div></td></tr><tr><td><a href="b1bdad4d-6a56-ef55-27c3-8874ffa036fa.htm">Unwrap<span id="LSTFE074330_32" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></a></td><td>
+            Returns the underlying value when <a href="4710cd0c-eaa4-15de-c823-9f3f7169b3e4.htm">IsSome</a>; or throws when <a href="fa0e79c2-f73d-1b35-6c7d-7c17560603c3.htm">IsNone</a>.
+            Must be called shyly, as it is not necessary to unwrap until the final result is achieved due to Map, FlatMap and TryMap methods.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">Opt&lt;int&gt; optAge = "42".ParseIntOrNone();
+if (optAge.IsSome) {
+    int age = optAge.Unwrap(); // use the uwrapped age
+} else { // handle the None case
+}</code></pre></div></div></td></tr><tr><td><a href="c42a3437-e329-29b5-6945-9c14cebc7043.htm">Unwrap(String)</a></td><td>
+            Similar to <a href="b1bdad4d-6a56-ef55-27c3-8874ffa036fa.htm">Unwrap<span id="LSTFE074330_33" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></a> method except that the <span class="parameter">errorMessageIfNone</span> is appended to the error message if <a href="fa0e79c2-f73d-1b35-6c7d-7c17560603c3.htm">IsNone</a>.
+            </td></tr><tr><td><a href="e8897b43-d95b-6a68-33bf-d012fa00e1bf.htm">UnwrapOr(Func<span id="LSTFE074330_34" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>T<span id="LSTFE074330_35" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</a></td><td>
+            Returns the underlying value when <a href="4710cd0c-eaa4-15de-c823-9f3f7169b3e4.htm">IsSome</a>; or returns <span class="parameter">lazyFallbackValue</span>() when <a href="fa0e79c2-f73d-1b35-6c7d-7c17560603c3.htm">IsNone</a>.
+            This is a safe way to unwrap the optional, by explicitly handling the None variant.
+            Use the eager <a href="ed519c64-44cd-728a-29ba-561e68a01c8d.htm">UnwrapOr(T)</a> variant if the fallback value is cheap or readily available.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">static int GetCapacity(IEnumerable&lt;T&gt; collection, Opt&lt;int&gt; givenCapacity) {
+    // capacity will be either the givenCapacity, or the number of elements in the collection.
+    // note that, collection.Count() might be expensive requiring linear search.
+    // lazy call avoids this call when givenCapacity.IsSome.
+    return givenCapacity.UnwrapOr(() =&gt; collection.Count());
+}</code></pre></div></div></td></tr><tr><td><a href="ed519c64-44cd-728a-29ba-561e68a01c8d.htm">UnwrapOr(T)</a></td><td>
+            Returns the underlying value when <a href="4710cd0c-eaa4-15de-c823-9f3f7169b3e4.htm">IsSome</a>; or returns the <span class="parameter">fallbackValue</span> when <a href="fa0e79c2-f73d-1b35-6c7d-7c17560603c3.htm">IsNone</a>.
+            This is a safe way to unwrap the optional, by explicitly handling the None variant.
+            Use the lazy <a href="e8897b43-d95b-6a68-33bf-d012fa00e1bf.htm">UnwrapOr(Func<span id="LSTFE074330_36" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>T<span id="LSTFE074330_37" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</a> variant if the computation of the fallback value is expensive.
+            <div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs">Assert(Some(42).UnwrapOr(7) == 42);
+Assert(None&lt;int&gt;().UnwrapOr(7) == 7);</code></pre></div></div></td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>See Also</h2><div id="seeAlsoSection"><h4>Reference</h4><div><a href="892ceed9-568d-ac62-ed9d-0be73c75bb2a.htm">Opt<span id="LSTFE074330_38" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|nu=(|fs=&lt;'"></span>T<span id="LSTFE074330_39" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|nu=)|fs=&gt;"></span> Structure</a></div><div><a href="9dbb6989-bdfb-5c0a-a52e-0d0ce2d4e01a.htm">OptRes Namespace</a></div></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Methods</a></li><li><a class="quickLink">See Also</a></li></ul></nav></div></div></div><footer id="PageFooter" class="footer border-top py-3 fixedFooter"><div class="columns"><div class="column"> 
+				</div><div class="column"> 
+				</div></div></footer></div><script>$(function(){
+SetDefaultLanguage("cs");
+LoadTocFile(null, null);
+InitializeQuickLinks();
+
+$(".toggleSection" ).click(function () {
+    SectionExpandCollapse(this);
+});
+
+$(".toggleSection").keypress(function () {
+    SectionExpandCollapseCheckKey(this, event)
+});
+hljs.highlightAll();
+});</script></body></html>
