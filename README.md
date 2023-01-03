@@ -19,7 +19,7 @@ using static OptRes.Extensions;
 ```
 
 Complete auto-generated documentation can be found here:
-[sandcastle-documentation](https://github.com/Ugur-Arikan/OptRes/blob/main/docs/index.html).
+**[sandcastle-documentation](https://ugur-arikan.github.io/OptRes/docs/index.html)**.
 
 ## Opt&lt;T>
 Opt<T> is a readonly struct that can be either of the two variants:
