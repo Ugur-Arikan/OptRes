@@ -123,7 +123,7 @@ public readonly struct Res
     /// );
     /// </code>
     /// </summary>
-    public void MatchDo<TOut>(Action whenOk, Action<string> whenErr)
+    public void MatchDo(Action whenOk, Action<string> whenErr)
     {
         if (IsOk)
             whenOk();
