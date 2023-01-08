@@ -122,6 +122,114 @@ public static partial class Extensions
     }
 
 
+    // TrySet
+    /// <summary>
+    /// Tries to set the <paramref name="index"/>-th element of the collection with the given <paramref name="value"/>;
+    /// returns Ok() if the <paramref name="index"/> is valid; the Err otherwise.
+    /// 
+    /// <code>
+    /// Span&lt;int> collection = new[] { 0, 1, 2 };
+    /// ReadOnlySpan&lt;int> collection = new[] { 0, 1, 2 };
+    /// Memory&lt;int> collection = new[] { 0, 1, 2 };
+    /// ReadOnlyMemory&lt;int> collection = new[] { 0, 1, 2 };
+    /// int[] collection = new[] { 0, 1, 2 };
+    /// List&lt;int> collection = new() { 0, 1, 2 };
+    /// IList&lt;int> collection = new List&lt;int>() { 0, 1, 2 };
+    /// IEnumerable&lt;int> collection = new int[] { 0, 1, 2 };
+    /// 
+    /// Assert(collection.GetOrNone(1) == Some(1));
+    /// 
+    /// Res res = collection.TrySet(1, 42);
+    /// Assert(res.IsOk);
+    /// Assert(collection.GetOrNone(1) == Some(42));
+    /// 
+    /// Assert(collection.TrySet(-1, 42).IsErr);
+    /// Assert(collection.TrySet(2, 42).IsErr);
+    /// </code>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to update.</param>
+    /// <param name="value">Value to be set.</param>
+    public static Res TrySet<T>(this T[] collection, int index, T value)
+    {
+        if (index > -1 && index < collection.Length)
+        {
+            collection[index] = value;
+            return Ok();
+        }
+        else
+            return Err(string.Format("Index out of bounds: index={0}, expected-range=[{0},{1}).", index, collection.Length));
+    }
+    /// <summary>
+    /// <inheritdoc cref="TrySet{T}(T[], int, T)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to update.</param>
+    /// <param name="value">Value to be set.</param>
+    public static Res TrySet<T>(this Span<T> collection, int index, T value)
+    {
+        if (index > -1 && index < collection.Length)
+        {
+            collection[index] = value;
+            return Ok();
+        }
+        else
+            return Err(string.Format("Index out of bounds: index={0}, expected-range=[{0},{1}).", index, collection.Length));
+    }
+    /// <summary>
+    /// <inheritdoc cref="TrySet{T}(T[], int, T)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to update.</param>
+    /// <param name="value">Value to be set.</param>
+    public static Res TrySet<T>(this Memory<T> collection, int index, T value)
+    {
+        if (index > -1 && index < collection.Length)
+        {
+            collection.Span[index] = value;
+            return Ok();
+        }
+        else
+            return Err(string.Format("Index out of bounds: index={0}, expected-range=[{0},{1}).", index, collection.Length));
+    }
+    /// <summary>
+    /// <inheritdoc cref="TrySet{T}(T[], int, T)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to update.</param>
+    /// <param name="value">Value to be set.</param>
+    public static Res TrySet<T>(this List<T> collection, int index, T value)
+    {
+        if (index > -1 && index < collection.Count)
+        {
+            collection[index] = value;
+            return Ok();
+        }
+        else
+            return Err(string.Format("Index out of bounds: index={0}, expected-range=[{0},{1}).", index, collection.Count));
+    }
+    /// <summary>
+    /// <inheritdoc cref="TrySet{T}(T[], int, T)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to update.</param>
+    /// <param name="value">Value to be set.</param>
+    public static Res TrySet<T>(this IList<T> collection, int index, T value)
+    {
+        if (index > -1 && index < collection.Count)
+        {
+            collection[index] = value;
+            return Ok();
+        }
+        else
+            return Err(string.Format("Index out of bounds: index={0}, expected-range=[{0},{1}).", index, collection.Count));
+    }
+
 
     // first/last or none
     /// <summary>
@@ -367,6 +475,7 @@ public static partial class Extensions
     /// <param name="results">Results to be reduced.</param>
     public static Res ReduceResults(params Res[] results)
         => results.AsEnumerable().Reduce();
+
 
     // reduce-res<T>
     /// <summary>
