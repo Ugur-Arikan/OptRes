@@ -8,7 +8,7 @@
   </PropertyGroup>
 
     <PropertyGroup>
-		<VersionPrefix>6.1.1</VersionPrefix>
+		<VersionPrefix>6.1.2</VersionPrefix>
 		<Description>Library for option and result (simplified) types.</Description>
 		<PackageProjectUrl>https://ugur-arikan.github.io/OptRes/</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Ugur-Arikan/OptRes</RepositoryUrl>

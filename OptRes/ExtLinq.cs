@@ -7,6 +7,122 @@ namespace OptRes;
 /// </summary>
 public static partial class Extensions
 {
+    // GetOrNone
+    /// <summary>
+    /// Safely gets and returns the <paramref name="index"/>-th element of the collection;
+    /// or returns None if the index is invalid.
+    /// 
+    /// <code>
+    /// Span&lt;int> collection = new[] { 0, 1, 2 };
+    /// ReadOnlySpan&lt;int> collection = new[] { 0, 1, 2 };
+    /// Memory&lt;int> collection = new[] { 0, 1, 2 };
+    /// ReadOnlyMemory&lt;int> collection = new[] { 0, 1, 2 };
+    /// int[] collection = new[] { 0, 1, 2 };
+    /// List&lt;int> collection = new() { 0, 1, 2 };
+    /// IList&lt;int> collection = new List&lt;int>() { 0, 1, 2 };
+    /// IEnumerable&lt;int> collection = new int[] { 0, 1, 2 };
+    /// 
+    /// Assert(collection.GetOrNone(1) == Some(1));
+    /// Assert(collection.GetOrNone(-1).IsNone);
+    /// Assert(collection.GetOrNone(2).IsNone);
+    /// </code>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to retrieve.</param>
+    public static Opt<T> GetOrNone<T>(this T[] collection, int index)
+        => SomeIf(index > -1 && index < collection.Length, collection[index]);
+    /// <summary>
+    /// <inheritdoc cref="GetOrNone{T}(T[], int)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to retrieve.</param>
+    public static Opt<T> GetOrNone<T>(this Span<T> collection, int index)
+        => SomeIf(index > -1 && index < collection.Length, collection[index]);
+    /// <summary>
+    /// <inheritdoc cref="GetOrNone{T}(T[], int)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to retrieve.</param>
+    public static Opt<T> GetOrNone<T>(this ReadOnlySpan<T> collection, int index)
+        => SomeIf(index > -1 && index < collection.Length, collection[index]);
+    /// <summary>
+    /// <inheritdoc cref="GetOrNone{T}(T[], int)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to retrieve.</param>
+    public static Opt<T> GetOrNone<T>(this Memory<T> collection, int index)
+        => SomeIf(index > -1 && index < collection.Length, collection.Span[index]);
+    /// <summary>
+    /// <inheritdoc cref="GetOrNone{T}(T[], int)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to retrieve.</param>
+    public static Opt<T> GetOrNone<T>(this ReadOnlyMemory<T> collection, int index)
+        => SomeIf(index > -1 && index < collection.Length, collection.Span[index]);
+    /// <summary>
+    /// <inheritdoc cref="GetOrNone{T}(T[], int)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to retrieve.</param>
+    public static Opt<T> GetOrNone<T>(this List<T> collection, int index)
+        => SomeIf(index > -1 && index < collection.Count, collection[index]);
+    /// <summary>
+    /// <inheritdoc cref="GetOrNone{T}(T[], int)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to retrieve.</param>
+    public static Opt<T> GetOrNone<T>(this IList<T> collection, int index)
+        => SomeIf(index > -1 && index < collection.Count, collection[index]);
+    /// <summary>
+    /// <inheritdoc cref="GetOrNone{T}(T[], int)"/>
+    /// </summary>
+    /// <typeparam name="T">Type of the collection.</typeparam>
+    /// <param name="collection">Collection of elements of <typeparamref name="T"/>.</param>
+    /// <param name="index">Index of the element of the collection to retrieve.</param>
+    public static Opt<T> GetOrNone<T>(this IEnumerable<T> collection, int index)
+    {
+        if (index < 0)
+            return default;
+        if (collection.TryGetNonEnumeratedCount(out int count))
+        {
+            if (index < count)
+                return Some(collection.ElementAt(index));
+            else
+                return default;
+        }
+        else
+        {
+            if (typeof(T).IsClass)
+            {
+                T? element = collection.ElementAtOrDefault(index);
+                if (element == null)
+                    return default;
+                else
+                    return Some(element);
+            }
+            else
+            {
+                try
+                {
+                    return Some(collection.ElementAt(index));
+                }
+                catch
+                {
+                    return default;
+                }
+            }
+        }
+    }
+
+
+
     // first/last or none
     /// <summary>
     /// Returns Some of the first element of the <paramref name="collection"/> if it is non-empty; None otherwise.
@@ -18,6 +134,10 @@ public static partial class Extensions
     /// <param name="collection">Collection.</param>
     public static Opt<T> FirstOrNone<T>(this IEnumerable<T> collection)
     {
+        Memory<int> span = new[] { 0, 1, 2 };
+        IList<int> list = new List<int>() { 0, 1, 2 };
+        IEnumerable<int> enumerable = new[] { 0, 1, 2 };
+
         foreach (var item in collection)
             return Some(item);
         return None<T>();
