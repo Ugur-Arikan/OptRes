@@ -159,7 +159,7 @@ public static partial class Extensions
             return Ok();
         }
         else
-            return Err(string.Format("Index out of bounds: index={0}, expected-range=[{0},{1}).", index, collection.Length));
+            return Err(string.Format("Index out of bounds: index={0}, expected-range=[0,{1}).", index, collection.Length));
     }
     /// <summary>
     /// <inheritdoc cref="TrySet{T}(T[], int, T)"/>
@@ -176,7 +176,7 @@ public static partial class Extensions
             return Ok();
         }
         else
-            return Err(string.Format("Index out of bounds: index={0}, expected-range=[{0},{1}).", index, collection.Length));
+            return Err(string.Format("Index out of bounds: index={0}, expected-range=[0,{1}).", index, collection.Length));
     }
     /// <summary>
     /// <inheritdoc cref="TrySet{T}(T[], int, T)"/>
@@ -193,7 +193,7 @@ public static partial class Extensions
             return Ok();
         }
         else
-            return Err(string.Format("Index out of bounds: index={0}, expected-range=[{0},{1}).", index, collection.Length));
+            return Err(string.Format("Index out of bounds: index={0}, expected-range=[0,{1}).", index, collection.Length));
     }
     /// <summary>
     /// <inheritdoc cref="TrySet{T}(T[], int, T)"/>
@@ -210,7 +210,7 @@ public static partial class Extensions
             return Ok();
         }
         else
-            return Err(string.Format("Index out of bounds: index={0}, expected-range=[{0},{1}).", index, collection.Count));
+            return Err(string.Format("Index out of bounds: index={0}, expected-range=[0,{1}).", index, collection.Count));
     }
     /// <summary>
     /// <inheritdoc cref="TrySet{T}(T[], int, T)"/>
@@ -227,7 +227,7 @@ public static partial class Extensions
             return Ok();
         }
         else
-            return Err(string.Format("Index out of bounds: index={0}, expected-range=[{0},{1}).", index, collection.Count));
+            return Err(string.Format("Index out of bounds: index={0}, expected-range=[0,{1}).", index, collection.Count));
     }
 
 
